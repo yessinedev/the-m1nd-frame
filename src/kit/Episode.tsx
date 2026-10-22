@@ -42,29 +42,36 @@ export function Episode<Id extends string>({ scenes, components, captions, count
       <Grain />
       <Vignette />
 
-      {music.map((m, i) => {
-        const dur = f(m.to) - f(m.from);
-        return (
-          <Sequence key={`music${i}`} name={`music ${m.src.split('/').pop()}`} from={f(m.from)} durationInFrames={dur}>
-            <Audio
-              src={staticFile(m.src)}
-              trimBefore={m.trimBefore ? f(m.trimBefore) : undefined}
-              volume={(fr) =>
-                m.volume *
-                Math.min(
-                  interpolate(fr, [0, m.fadeIn * FPS], [0, 1], { extrapolateRight: 'clamp' }),
-                  interpolate(fr, [(m.fadeOutFrom - m.from) * FPS, dur], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
-                )
-              }
-            />
-          </Sequence>
-        );
-      })}
-      {sfx.map((s, i) => (
-        <Sequence key={`sfx${i}`} name={`sfx ${s.src.split('/').pop()}`} from={f(s.at)} durationInFrames={s.dur ? f(s.dur) : f(3)}>
-          <Audio src={staticFile(s.src)} volume={s.volume ?? 1} />
-        </Sequence>
-      ))}
+      <Soundtrack music={music} sfx={sfx} />
     </AbsoluteFill>
   );
 }
+
+// Score + sound effects on the composition timeline. Shared by episodes and Shorts.
+export const Soundtrack: React.FC<{ music: Music[]; sfx: Sfx[] }> = ({ music, sfx }) => (
+  <>
+    {music.map((m, i) => {
+      const dur = f(m.to) - f(m.from);
+      return (
+        <Sequence key={`music${i}`} name={`music ${m.src.split('/').pop()}`} from={f(m.from)} durationInFrames={dur}>
+          <Audio
+            src={staticFile(m.src)}
+            trimBefore={m.trimBefore ? f(m.trimBefore) : undefined}
+            volume={(fr) =>
+              m.volume *
+              Math.min(
+                interpolate(fr, [0, m.fadeIn * FPS], [0, 1], { extrapolateRight: 'clamp' }),
+                interpolate(fr, [(m.fadeOutFrom - m.from) * FPS, dur], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }),
+              )
+            }
+          />
+        </Sequence>
+      );
+    })}
+    {sfx.map((s, i) => (
+      <Sequence key={`sfx${i}`} name={`sfx ${s.src.split('/').pop()}`} from={f(s.at)} durationInFrames={s.dur ? f(s.dur) : f(3)}>
+        <Audio src={staticFile(s.src)} volume={s.volume ?? 1} />
+      </Sequence>
+    ))}
+  </>
+);

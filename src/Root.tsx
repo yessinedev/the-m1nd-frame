@@ -37,7 +37,11 @@ import { DURATION_SEC as DAY0_SEC } from './episodes/day0/script';
 import { Screen } from './episodes/screen/Screen';
 import { Thumbnail as ScreenThumbnail } from './episodes/screen/Thumbnail';
 import { DURATION_SEC as SCREEN_SEC } from './episodes/screen/script';
-import { f, FPS, HEIGHT, WIDTH } from './kit/time';
+import { Day0Short } from './episodes/day0/Day0Short';
+import { SHORT_SEC as DAY0_SHORT_SEC } from './episodes/day0/short';
+import { ScreenShort } from './episodes/screen/ScreenShort';
+import { SHORT_SEC as SCREEN_SHORT_SEC } from './episodes/screen/short';
+import { f, FPS, HEIGHT, SHORT_HEIGHT, SHORT_WIDTH, WIDTH } from './kit/time';
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -45,6 +49,8 @@ export const RemotionRoot: React.FC = () => (
     <Still id="Thumbnail" component={Day0Thumbnail} width={1280} height={720} />
     <Composition id="Screen" component={Screen} durationInFrames={f(SCREEN_SEC)} fps={FPS} width={WIDTH} height={HEIGHT} />
     <Still id="ScreenThumbnail" component={ScreenThumbnail} width={1280} height={720} />
+    <Composition id="Day0Short" component={Day0Short} durationInFrames={f(DAY0_SHORT_SEC)} fps={FPS} width={SHORT_WIDTH} height={SHORT_HEIGHT} />
+    <Composition id="ScreenShort" component={ScreenShort} durationInFrames={f(SCREEN_SHORT_SEC)} fps={FPS} width={SHORT_WIDTH} height={SHORT_HEIGHT} />
     <Composition id="LastTime" component={LastTime} durationInFrames={f(LASTTIME_SEC)} fps={FPS} width={WIDTH} height={HEIGHT} />
     <Still id="LastTimeThumbnail" component={LastTimeThumbnail} width={1280} height={720} />
     <Composition id="Hoodie" component={Hoodie} durationInFrames={f(HOODIE_SEC)} fps={FPS} width={WIDTH} height={HEIGHT} />

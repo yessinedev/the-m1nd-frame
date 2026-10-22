@@ -6,7 +6,7 @@ import { CouchApart, Compare, Dinner, Empty, Leaving, Unread } from './scenes/ac
 import { AloneWalk, BenchScene, Doorstep, EndCard, Hands, Letter, PhoneDown } from './scenes/act3';
 
 // Episode 2 — "He Chose the Screen Over Her."
-const COMPONENTS: Record<SceneId, React.FC<SceneProps>> = {
+export const COMPONENTS: Record<SceneId, React.FC<SceneProps>> = {
   coldOpen: ColdOpen,
   couchLove: CouchLove,
   kitchen: KitchenScene,

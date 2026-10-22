@@ -6,7 +6,7 @@ import { DeskStuck, LoopNights, MirrorDim, Snooze, TurningPoint } from './scenes
 import { Bag, BenchScene, DeskFocus, EndCard, MirrorClear, Morning, Payoff, Run, Urge } from './scenes/act3';
 
 // Episode 1 — "Day 0."
-const COMPONENTS: Record<SceneId, React.FC<SceneProps>> = {
+export const COMPONENTS: Record<SceneId, React.FC<SceneProps>> = {
   coldOpen: ColdOpen,
   bedDay1: BedDay1,
   calendar: CalendarScene,
