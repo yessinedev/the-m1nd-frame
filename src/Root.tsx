@@ -1,6 +1,21 @@
 import React from 'react';
 import { Composition, Still } from 'remotion';
 import { RigTest } from './dev/RigTest';
+import { Mom } from './episodes/mom/Mom';
+import { Future } from './episodes/future/Future';
+import { Birthday } from './episodes/birthday/Birthday';
+import { Lockbox } from './episodes/lockbox/Lockbox';
+import { Shoes } from './episodes/shoes/Shoes';
+import { Thumbnail as ShoesThumbnail } from './episodes/shoes/Thumbnail';
+import { DURATION_SEC as SHOES_SEC } from './episodes/shoes/script';
+import { Thumbnail as LockboxThumbnail } from './episodes/lockbox/Thumbnail';
+import { DURATION_SEC as LOCKBOX_SEC } from './episodes/lockbox/script';
+import { Thumbnail as BirthdayThumbnail } from './episodes/birthday/Thumbnail';
+import { DURATION_SEC as BIRTHDAY_SEC } from './episodes/birthday/script';
+import { Thumbnail as FutureThumbnail } from './episodes/future/Thumbnail';
+import { DURATION_SEC as FUTURE_SEC } from './episodes/future/script';
+import { Thumbnail as MomThumbnail } from './episodes/mom/Thumbnail';
+import { DURATION_SEC as MOM_SEC } from './episodes/mom/script';
 import { Crush } from './episodes/crush/Crush';
 import { Thumbnail as CrushThumbnail } from './episodes/crush/Thumbnail';
 import { DURATION_SEC as CRUSH_SEC } from './episodes/crush/script';
@@ -40,6 +55,16 @@ export const RemotionRoot: React.FC = () => (
     <Still id="JulyThumbnail" component={JulyThumbnail} width={1280} height={720} />
     <Composition id="Crush" component={Crush} durationInFrames={f(CRUSH_SEC)} fps={FPS} width={WIDTH} height={HEIGHT} />
     <Still id="CrushThumbnail" component={CrushThumbnail} width={1280} height={720} />
+    <Composition id="Mom" component={Mom} durationInFrames={f(MOM_SEC)} fps={FPS} width={WIDTH} height={HEIGHT} />
+    <Still id="MomThumbnail" component={MomThumbnail} width={1280} height={720} />
+    <Composition id="Future" component={Future} durationInFrames={f(FUTURE_SEC)} fps={FPS} width={WIDTH} height={HEIGHT} />
+    <Still id="FutureThumbnail" component={FutureThumbnail} width={1280} height={720} />
+    <Composition id="Birthday" component={Birthday} durationInFrames={f(BIRTHDAY_SEC)} fps={FPS} width={WIDTH} height={HEIGHT} />
+    <Still id="BirthdayThumbnail" component={BirthdayThumbnail} width={1280} height={720} />
+    <Composition id="Lockbox" component={Lockbox} durationInFrames={f(LOCKBOX_SEC)} fps={FPS} width={WIDTH} height={HEIGHT} />
+    <Still id="LockboxThumbnail" component={LockboxThumbnail} width={1280} height={720} />
+    <Composition id="Shoes" component={Shoes} durationInFrames={f(SHOES_SEC)} fps={FPS} width={WIDTH} height={HEIGHT} />
+    <Still id="ShoesThumbnail" component={ShoesThumbnail} width={1280} height={720} />
     <Composition id="RigTest" component={RigTest} durationInFrames={120} fps={FPS} width={WIDTH} height={HEIGHT} />
   </>
 );

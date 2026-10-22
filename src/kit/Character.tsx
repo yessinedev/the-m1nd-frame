@@ -12,7 +12,7 @@ export type Eyes = 'open' | 'tired' | 'closed' | 'wide' | 'down' | 'happy';
 export type Mouth = 'none' | 'flat' | 'frown' | 'smile' | 'open' | 'grin' | 'o' | 'talk';
 export type Brow = 'none' | 'sad' | 'focused' | 'worried' | 'raised';
 export type HandShape = 'relaxed' | 'fist' | 'open' | 'point' | 'grip';
-export type Variant = 'him' | 'her' | 'sam' | 'lena' | 'jay' | 'leo' | 'kid' | 'nora';
+export type Variant = 'him' | 'her' | 'sam' | 'lena' | 'jay' | 'leo' | 'kid' | 'nora' | 'mom' | 'nana';
 
 export type Pose = {
   armFar: Limb;
@@ -418,6 +418,7 @@ type Style = {
   cap?: string;
   pony?: boolean;
   long?: boolean; // long hair past the shoulders
+  bun?: boolean; // hair pinned up in a bun at the back
   curly?: string; // curly hair colour
   short?: string; // short flat-top hair colour
   glasses?: boolean;
@@ -433,6 +434,8 @@ const STYLES: Record<Variant, Style> = {
   kid: { top: '#6E3B3B', topShade: '#5A3030', pants: C.pants, pantsShade: C.pantsShade, shoe: C.shoe, sole: C.sole, short: '#2A2420', round: false, hood: true },
   jay: { top: C.jayTop, topShade: C.jayTopShade, pants: C.pants, pantsShade: C.pantsShade, shoe: C.shoe, sole: C.sole, curly: '#2A1E19', round: false, hood: true },
   leo: { top: C.leoTop, topShade: C.leoTopShade, pants: C.herPants, pantsShade: C.herPantsShade, shoe: C.shoe, sole: C.sole, short: '#3B2E25', glasses: true, round: false, hood: true },
+  mom: { top: '#7B6A5A', topShade: '#665747', pants: C.herPants, pantsShade: C.herPantsShade, shoe: C.shoe, sole: C.sole, hair: '#8A8178', bun: true, round: true, hood: false },
+  nana: { top: '#6A5A70', topShade: '#574A5C', pants: C.herPants, pantsShade: C.herPantsShade, shoe: C.shoe, sole: C.sole, hair: '#D2CDC4', bun: true, glasses: true, round: true, hood: false },
   lena: { top: C.lilac, topShade: C.lilacShade, pants: C.herPants, pantsShade: C.herPantsShade, shoe: C.shoe, sole: C.sole, hair: C.auburn, pony: true, round: true, hood: true },
 };
 
@@ -448,7 +451,7 @@ const Cap: React.FC<{ color: string }> = ({ color }) => (
 );
 
 // Head shape + hair, in head space (centre of the face at 0,0).
-type HeadStyle = { round: boolean; hair?: string; cap?: string; pony?: boolean; long?: boolean; curly?: string; short?: string; glasses?: boolean };
+type HeadStyle = { round: boolean; hair?: string; cap?: string; pony?: boolean; long?: boolean; bun?: boolean; curly?: string; short?: string; glasses?: boolean };
 
 // Gaming headset: band over the top, cups on both sides, mic boom on the near side.
 const Headset: React.FC = () => (
@@ -470,8 +473,9 @@ const Glasses: React.FC = () => (
   </g>
 );
 
-const HeadShape: React.FC<HeadStyle & { swing?: number; headset?: boolean; children?: React.ReactNode }> = ({ round, hair, cap, pony, long, curly, short, glasses, headset, swing = 0, children }) => (
+const HeadShape: React.FC<HeadStyle & { swing?: number; headset?: boolean; children?: React.ReactNode }> = ({ round, hair, cap, pony, long, bun, curly, short, glasses, headset, swing = 0, children }) => (
   <g>
+    {hair && bun ? <circle cx={-52} cy={-84} r={40} fill={hair} /> : null}
     {hair && long ? <rect x={-92 + swing * 0.3} y={-86} width={184} height={250} rx={70} fill={hair} /> : null}
     {hair && pony ? (
       <g transform={`translate(-78 -46) rotate(${24 + swing * 3})`}>
